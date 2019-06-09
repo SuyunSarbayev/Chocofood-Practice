@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorPrimary"
+    tools:context=".splash.SplashActivity">
+
+    <ImageView
+        android:id="@+id/imageview_splash_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/splash_chocofood_logo" />
+
+    <TextView
+        android:id="@+id/textview_splash_choco"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_small"
+        android:text="@string/splash_choco"
+        android:textAlignment="viewEnd"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_large"
+        app:layout_constraintEnd_toStartOf="@+id/textview_splash_food"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_splash_logo" />
+
+    <TextView
+        android:id="@+id/textview_splash_food"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/splash_food"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_large"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/textview_splash_choco"
+        app:layout_constraintStart_toEndOf="@+id/textview_splash_choco" />
+
+    <TextView
+        android:id="@+id/textview_splash_hungry"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splash_hungry"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_splash_choco" />
+
+    <TextView
+        android:id="@+id/textview_splash_version"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:text="@string/splash_version"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textview_splash_hungry"
+        app:layout_constraintVertical_bias="1.0" />
+</android.support.constraint.ConstraintLayout>

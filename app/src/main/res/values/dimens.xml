@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    //Margin
+    <dimen name="margin_extra_small">4dp</dimen>
+    <dimen name="margin_small">8dp</dimen>
+    <dimen name="margin_medium">16dp</dimen>
+    <dimen name="margin_large">24dp</dimen>
+
+    //Padding
+    <dimen name="padding_small">8dp</dimen>
+
+    //Size
+    <dimen name="textsize_small">10sp</dimen>
+    <dimen name="textsize_large">20sp</dimen>
+    
+    <dimen name="item_restaurant_corner_radius">10dp</dimen>
+
+    <dimen name="imageheight_item_restaurant">160dp</dimen>
+
+</resources>

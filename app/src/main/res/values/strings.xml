@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">Chocofood</string>
+    <string name="splash_choco">Choco</string>
+    <string name="splash_food">food</string>
+    <string name="splash_hungry">Никто не останется голодным!</string>
+    <string name="splash_version">Chocofood mobile v4.8</string>
+
+    <string name="appbar_scrolling_view_behavior"
+        translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
+    
+    <string name="main_tablayout_best">Лучшее</string>
+    <string name="main_tablayout_popular">Популярное</string>
+    <string name="main_tablayout_favorites">Избранные</string>
+    <string name="item_restaurant_advertisement">Реклама</string>
+    <string name="item_restaurant_price">2000 тг</string>
+    <string name="item_restaurant_delivery">от 0 тг</string>
+
+</resources>

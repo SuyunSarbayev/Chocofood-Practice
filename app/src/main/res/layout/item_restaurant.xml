@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/margin_medium"
+    android:layout_marginStart="@dimen/margin_medium"
+    android:layout_marginEnd="@dimen/margin_medium"
+    android:background="@drawable/main_restaurant_card_background">
+
+    <com.joooonho.SelectableRoundedImageView
+        android:id="@+id/imageview_item_restaurant"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/imageheight_item_restaurant"
+        android:scaleType="centerCrop"
+        android:adjustViewBounds="true"
+        app:sriv_left_top_corner_radius="@dimen/item_restaurant_corner_radius"
+        app:sriv_right_top_corner_radius="@dimen/item_restaurant_corner_radius"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <View
+        android:id="@+id/view_item_shadow"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/imageheight_item_restaurant"
+        android:background="@drawable/main_restaurant_shadow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <TextView
+        android:id="@+id/textview_item_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_small"
+        android:textSize="@dimen/textsize_large"
+        android:textColor="@android:color/black"
+        app:layout_constraintTop_toBottomOf="@+id/imageview_item_restaurant"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textview_item_cuisines"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginEnd="@dimen/margin_extra_small"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:textSize="@dimen/textsize_small"
+        app:layout_constraintTop_toBottomOf="@+id/textview_item_title"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textview_item_advertisement"/>
+
+    <TextView
+        android:id="@+id/textview_item_advertisement"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:background="@drawable/main_restaurant_advertisement_background"
+        android:text="@string/item_restaurant_advertisement"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/textsize_small"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textview_item_cuisines"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/textview_item_cuisines" />
+
+    <ImageView
+        android:id="@+id/imageview_item_scooter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
+        app:srcCompat="@drawable/ic_scooter_24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/textview_item_scooter"
+        app:layout_constraintTop_toBottomOf="@+id/textview_item_cuisines" />
+
+    <TextView
+        android:id="@+id/textview_item_scooter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:text="@string/item_restaurant_delivery"
+        android:textSize="@dimen/textsize_small"
+        app:layout_constraintStart_toEndOf="@+id/imageview_item_scooter"
+        app:layout_constraintTop_toTopOf="@+id/imageview_item_scooter" />
+
+    <ImageView
+        android:id="@+id/imageview_item_tenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_large"
+        app:layout_constraintStart_toEndOf="@+id/textview_item_scooter"
+        app:layout_constraintTop_toTopOf="@+id/imageview_item_scooter"
+        app:srcCompat="@drawable/ic_tenge_24dp" />
+
+    <TextView
+        android:id="@+id/textview_item_tenge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_extra_small"
+        android:text="@string/item_restaurant_price"
+        android:textSize="@dimen/textsize_small"
+        app:layout_constraintStart_toEndOf="@+id/imageview_item_tenge"
+        app:layout_constraintTop_toTopOf="@+id/imageview_item_tenge" />
+
+    <View
+        android:id="@+id/view_item_bottom_line"
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:background="@android:color/darker_gray"
+        android:layout_marginTop="@dimen/margin_small"
+        app:layout_constraintTop_toBottomOf="@id/imageview_item_scooter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</android.support.constraint.ConstraintLayout>
