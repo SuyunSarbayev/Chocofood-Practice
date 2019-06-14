@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#D63637</color>
-    <color name="colorPrimaryDark">#D63637</color>
+    <color name="colorPrimaryDark">#E53935</color>
     <color name="colorAccent">#D81B60</color>
 
 
-    <color name="tintRestaurantImage">#33000000</color>
+    <color name="tintGrey">#33000000</color>
+    <color name="colorGreen">#6AA27E</color>
+    <color name="colorPlaceholder">#DDDDDD</color>
+    <color name="colorRed">#E53935</color>
+    <color name="colorDarkRed">#D0021B</color>
+    <color name="colorGrey">#757575</color>
+    <color name="colorYellow">#FFC400</color>
 </resources>

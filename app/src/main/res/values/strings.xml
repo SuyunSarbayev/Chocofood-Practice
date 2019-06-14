@@ -7,7 +7,10 @@
 
     <string name="appbar_scrolling_view_behavior"
         translatable="false">android.support.design.widget.AppBarLayout$ScrollingViewBehavior</string>
-    
+
+    <string name="main_edittext_address_search">Алматы, бульвар Бухар Жырау, д.75/2</string>
+    <string name="main_textview_restaurant_search">Название заведения или блюда...</string>
+
     <string name="main_tablayout_best">Лучшее</string>
     <string name="main_tablayout_popular">Популярное</string>
     <string name="main_tablayout_favorites">Избранные</string>

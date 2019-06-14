@@ -5,6 +5,7 @@
     <dimen name="margin_small">8dp</dimen>
     <dimen name="margin_medium">16dp</dimen>
     <dimen name="margin_large">24dp</dimen>
+    <dimen name="margin_extra_large">64dp</dimen>
 
     //Padding
     <dimen name="padding_small">8dp</dimen>
@@ -15,6 +16,9 @@
     
     <dimen name="item_restaurant_corner_radius">10dp</dimen>
 
-    <dimen name="imageheight_item_restaurant">160dp</dimen>
+    <dimen name="imageheight_item_restaurant">140dp</dimen>
+    <dimen name="padding_medium">16dp</dimen>
+    <dimen name="padding_extra_small">4dp</dimen>
+    <dimen name="textsize_medium">12sp</dimen>
 
 </resources>

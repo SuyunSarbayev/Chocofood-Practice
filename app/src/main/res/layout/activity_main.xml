@@ -4,45 +4,133 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     android:background="@android:color/white"
-    tools:context=".main.MainActivity">
+    tools:context=".presentation.main.MainActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:background="@android:color/white">
 
-        <View
-            android:id="@+id/view_main_address_search"
+        <LinearLayout
+            android:id="@+id/linearlayout_main_address_search"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@color/colorPrimary"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:layout_height="42dp"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@color/colorRed"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
 
-        <View
-            android:id="@+id/view_main_restaurant_search"
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/margin_small"
+                android:src="@drawable/ic_location_on_24dp"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="16dp"
+                android:textSize="12sp"
+                android:drawableEnd="@drawable/ic_select_location_24dp"
+                android:textColor="@android:color/white"
+                android:background="@drawable/main_address_search_background"
+                android:text="@string/main_edittext_address_search"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearlayout_main_restaurant_search"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
-            android:background="@android:color/darker_gray"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:layout_height="42dp"
+            android:orientation="horizontal"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:background="@color/colorGrey"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/margin_small"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_search_24dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="@dimen/margin_medium"
+                android:paddingStart="24dp"
+                android:paddingEnd="8dp"
+                android:textSize="12sp"
+                android:drawableEnd="@drawable/ic_filter_controls_24dp"
+                android:textColor="@android:color/white"
+                android:text="@string/main_textview_restaurant_search"/>
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageview_main_banner"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            app:layout_scrollFlags="scroll|enterAlways"/>
+            android:scaleType="centerCrop"
+            app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
+            android:visibility="gone"/>
+
+        <ProgressBar
+            android:id="@+id/progressbar_main_banner"
+            android:layout_width="wrap_content"
+            android:layout_height="200dp"
+            android:indeterminateTint="@color/colorGrey"
+            android:layout_gravity="center_horizontal"
+            android:visibility="visible"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_main_categories"
             android:layout_width="wrap_content"
-            android:layout_height="60dp"/>
+            android:layout_height="86dp"
+            android:visibility="gone"/>
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+            android:id="@+id/shimmerframe_main_categories"
+            android:layout_width="match_parent"
+            android:layout_height="86dp"
+            android:visibility="visible"
+            app:shimmer_duration="2000">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <include layout="@layout/item_category_place_holder" />
+
+                <include layout="@layout/item_category_place_holder" />
+
+                <include layout="@layout/item_category_place_holder" />
+
+                <include layout="@layout/item_category_place_holder" />
+
+                <include layout="@layout/item_category_place_holder" />
+
+            </LinearLayout>
+        </com.facebook.shimmer.ShimmerFrameLayout>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tablayout_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:tabTextAppearance="@style/TabLayoutTextStyle"
             android:background="@android:color/white"
-            app:tabSelectedTextColor="@color/colorPrimary" />
+            app:tabSelectedTextColor="@color/colorPrimary"/>
 
     </android.support.design.widget.AppBarLayout>
 
@@ -50,5 +138,34 @@
         android:id="@+id/recyclerview_main_restaurants"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:visibility="gone"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+    
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmerframe_main_restaurants"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="visible"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:shimmer_duration="2000">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <include layout="@layout/item_restaurant_place_holder" />
+
+                <include layout="@layout/item_restaurant_place_holder" />
+
+                <include layout="@layout/item_restaurant_place_holder" />
+
+            </LinearLayout>
+        </ScrollView>
+    </com.facebook.shimmer.ShimmerFrameLayout>
 </android.support.design.widget.CoordinatorLayout>
