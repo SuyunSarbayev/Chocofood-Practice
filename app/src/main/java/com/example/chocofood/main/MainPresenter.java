@@ -3,6 +3,7 @@ package com.example.chocofood.main;
 import android.util.Log;
 
 import com.example.chocofood.models.Banner;
+import com.example.chocofood.models.Category;
 import com.example.chocofood.models.Restaurant;
 import com.example.chocofood.network.NetworkClient;
 
@@ -23,18 +24,22 @@ public class MainPresenter {
         mMainView = mainView;
     }
 
-    public void getRestaurantsByFilter(String filter, int limit, int offset) {
-        getRestaurantsObservable(filter, limit, offset).subscribeWith(getRestaurantsObserver());
+    public void getRestaurantsByFilter(String filter,String type, int limit, int offset) {
+        getRestaurantsObservable(filter, type, limit, offset).subscribeWith(getRestaurantsObserver());
     }
 
     public void getBanner() {
         getBannerObservable().subscribeWith(getBannerObserver());
     }
 
-    private Observable<List<Restaurant>> getRestaurantsObservable(String filter, int limit, int offset) {
+    public void getCategory() {
+        getCategoryObservable().subscribeWith(getCategoryObserver());
+    }
+
+    private Observable<List<Restaurant>> getRestaurantsObservable(String filter, String type, int limit, int offset) {
         return NetworkClient.getInstance()
                 .getNetworkApi()
-                .getRestaurantsByFilter(filter, limit, offset)
+                .getRestaurantsByFilter(filter, type, limit, offset)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread());
     }
@@ -47,12 +52,43 @@ public class MainPresenter {
                 .observeOn(AndroidSchedulers.mainThread());
     }
 
+    private Observable<List<Category>> getCategoryObservable() {
+        return NetworkClient.getInstance()
+                .getNetworkApi()
+                .getCategory()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
     private DisposableObserver<List<Restaurant>> getRestaurantsObserver() {
         return new DisposableObserver<List<Restaurant>>() {
             @Override
             public void onNext(List<Restaurant> restaurantList) {
                 Log.d(TAG,"onNext");
                 mMainView.showRestaurants(restaurantList);
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG,"onError" + e);
+                mMainView.showError("Unable to fetch data");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG,"Completed");
+            }
+        };
+    }
+
+    private DisposableObserver<List<Category>> getCategoryObserver() {
+
+        return new DisposableObserver<List<Category>>() {
+            @Override
+            public void onNext(List<Category> categoryList) {
+
+                Log.d(TAG,"onNext");
+                mMainView.showCategory(categoryList);
+
             }
 
             @Override

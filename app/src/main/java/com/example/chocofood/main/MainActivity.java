@@ -1,19 +1,22 @@
 package com.example.chocofood.main;
 
-import android.os.Handler;
 import android.support.design.widget.TabLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.example.chocofood.R;
+import com.example.chocofood.adapters.CategoryAdapter;
 import com.example.chocofood.adapters.RestaurantAdapter;
+import com.example.chocofood.listeners.RecycleViewClickListener;
 import com.example.chocofood.listeners.PaginationScrollListener;
 import com.example.chocofood.models.Banner;
+import com.example.chocofood.models.Category;
 import com.example.chocofood.models.Restaurant;
 
 import java.util.ArrayList;
@@ -28,16 +31,20 @@ public class MainActivity extends AppCompatActivity implements MainView, TabLayo
 
     private MainPresenter mMainPresenter;
     private RestaurantAdapter mRestaurantAdapter;
+    private CategoryAdapter mCategoryAdapter;
     private LinearLayoutManager mLinearLayoutManager;
     private List<Restaurant> mRestaurantList;
+    private List<Category> mCategoryList;
 
     private boolean mIsLoading = false;
     private boolean mIsLastPage = false;
     private int mOffset = 0;
     private String mFilter;
+    private String mType = null;
 
     @BindView(R.id.imageview_main_banner) ImageView mBannerImageView;
     @BindView(R.id.tablayout_main) TabLayout mTabLayout;
+    @BindView(R.id.recyclerview_main_categories) RecyclerView mCategoryRecycler;
     @BindView(R.id.recyclerview_main_restaurants) RecyclerView mRestaurantsRecycler;
     
     @Override
@@ -47,18 +54,44 @@ public class MainActivity extends AppCompatActivity implements MainView, TabLayo
         ButterKnife.bind(this);
 
         setupTabLayout();
-
+        setupCategory();
         initUI();
+
+        mCategoryRecycler.addOnItemTouchListener(new RecycleViewClickListener(this, new RecycleViewClickListener.OnItemClickListener() {
+            @Override
+            public void onItemClick(View view, int position) {
+                System.out.println(mType);
+                mType = mCategoryList.get(position).getmSlug();
+                refreshData();
+                loadData(mOffset);
+
+            }
+        }));
+
 
         mMainPresenter.getBanner();
         loadData(mOffset);
     }
+
 
     private void setupTabLayout() {
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.main_tablayout_best));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.main_tablayout_popular));
         mTabLayout.addTab(mTabLayout.newTab().setText(R.string.main_tablayout_favorites));
         mTabLayout.addOnTabSelectedListener(this);
+    }
+    private void setupCategory()
+    {
+
+        mMainPresenter = new MainPresenter(this);
+        mMainPresenter.getCategory();
+        mCategoryList = new ArrayList<>();
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mCategoryRecycler.setLayoutManager(layoutManager);
+        mCategoryAdapter = new CategoryAdapter(this);
+        mCategoryAdapter.setCategoryList(mCategoryList);
+        mCategoryRecycler.setAdapter(mCategoryAdapter);
+
     }
 
     private void initUI() {
@@ -74,6 +107,7 @@ public class MainActivity extends AppCompatActivity implements MainView, TabLayo
             public void loadMoreItems() {
                 mIsLoading = true;
                 if (!mIsLastPage) {
+
                     loadData(mOffset);
                 }
             }
@@ -93,7 +127,7 @@ public class MainActivity extends AppCompatActivity implements MainView, TabLayo
     private void loadData(int offset) {
         String offsetMessage = "Loading offset " + offset + " =)";
         Toast.makeText(this, offsetMessage, Toast.LENGTH_SHORT).show();
-        mMainPresenter.getRestaurantsByFilter(mFilter, LIMIT, offset);
+        mMainPresenter.getRestaurantsByFilter(mFilter,mType, LIMIT, offset);
     }
 
     private void refreshData() {
@@ -116,6 +150,14 @@ public class MainActivity extends AppCompatActivity implements MainView, TabLayo
     }
 
     @Override
+    public void showCategory(List<Category> categoryList) {
+
+        mCategoryList.addAll(categoryList);
+        mCategoryAdapter.notifyDataSetChanged();
+
+    }
+
+    @Override
     public void showBanner(Banner banner) {
         Glide.with(this).load(banner.getImageUrl()).into(mBannerImageView);
     }
@@ -124,6 +166,8 @@ public class MainActivity extends AppCompatActivity implements MainView, TabLayo
     public void showError(String errorMessage) {
         Toast.makeText(this, errorMessage, Toast.LENGTH_SHORT).show();
     }
+
+
 
     @Override
     public void onTabSelected(TabLayout.Tab tab) {
