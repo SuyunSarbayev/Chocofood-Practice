@@ -25,6 +25,7 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     @BindView(R.id.textview_item_restaurant_rating) TextView mRating;
     @BindView(R.id.textview_item_restaurant_delivery_time) TextView mDeliveryTime;
     @BindView(R.id.textview_item_restaurant_promotion) TextView mPromotion;
+    @BindView(R.id.textview_item_restaurant_tenge) TextView mMinimumCost;
 
     public RestaurantViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -32,10 +33,13 @@ public class RestaurantViewHolder extends RecyclerView.ViewHolder {
     }
 
     public void bind(Restaurant restaurant, Context context) {
+        String rating = Double.toString(restaurant.getRating() / 20);
+        String minimumCost = Integer.toString(restaurant.getMinimumCost()) + " тг";
         mTitle.setText(restaurant.getTitle());
         mCuisines.setText(restaurant.getCuisines());
-        mRating.setText(Double.toString(restaurant.getRating()));
+        mRating.setText(rating);
         mDeliveryTime.setText(restaurant.getDeliveryTime());
+        mMinimumCost.setText(minimumCost);
         Glide.with(context).load(restaurant.getCardImageUrl()).into(mImage);
         Glide.with(context).load(restaurant.getLogoUrl()).into(mLogo);
 

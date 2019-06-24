@@ -12,15 +12,21 @@
 
     //Size
     <dimen name="textsize_small">10sp</dimen>
-    <dimen name="textsize_large">20sp</dimen>
+    <dimen name="textsize_medium">12sp</dimen>
+    <dimen name="textsize_large">18sp</dimen>
     
     <dimen name="item_restaurant_corner_radius">10dp</dimen>
 
     <dimen name="imageheight_item_restaurant">140dp</dimen>
     <dimen name="padding_medium">16dp</dimen>
     <dimen name="padding_extra_small">4dp</dimen>
-    <dimen name="textsize_medium">12sp</dimen>
-    <dimen name="category_imageview_width">42dp</dimen>
-    <dimen name="category_imageview_height">42dp</dimen>
+    <dimen name="category_imageview_width">44dp</dimen>
+    <dimen name="category_imageview_height">44dp</dimen>
+    <dimen name="main_address_view_height">44dp</dimen>
+    <dimen name="main_search_view_height">44dp</dimen>
+    <dimen name="main_banner_height">154dp</dimen>
+    <dimen name="categories_view_height">88dp</dimen>
+    <dimen name="restaurant_logo_width">74dp</dimen>
+    <dimen name="restaurant_logo_height">74dp</dimen>
 
 </resources>

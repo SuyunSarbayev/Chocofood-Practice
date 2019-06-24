@@ -28,11 +28,14 @@ public class RestaurantEntity {
     @SerializedName("promotions")
     private int mIsPromoted;
 
+    @SerializedName("cost_min")
+    private int mMinimumCost;
+
     public RestaurantEntity() {
     }
 
     public RestaurantEntity(int id, String title, String cardImageUrl, String cuisines,
-                            String logoUrl, Double rating, String deliveryTime, int isPromoted) {
+                            String logoUrl, Double rating, String deliveryTime, int isPromoted, int minimumCost) {
         mId = id;
         mTitle = title;
         mCardImageUrl = cardImageUrl;
@@ -41,6 +44,7 @@ public class RestaurantEntity {
         mRating = rating;
         mDeliveryTime = deliveryTime;
         mIsPromoted = isPromoted;
+        mMinimumCost = minimumCost;
     }
 
     public int getId() {
@@ -105,5 +109,13 @@ public class RestaurantEntity {
 
     public void setIsPromoted(int isPromoted) {
         mIsPromoted = isPromoted;
+    }
+
+    public int getMinimumCost() {
+        return mMinimumCost;
+    }
+
+    public void setMinimumCost(int minimumCost) {
+        mMinimumCost = minimumCost;
     }
 }

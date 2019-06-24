@@ -17,7 +17,7 @@
         <LinearLayout
             android:id="@+id/linearlayout_main_address_search"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="@dimen/main_address_view_height"
             android:orientation="horizontal"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -39,7 +39,7 @@
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:paddingStart="24dp"
                 android:paddingEnd="16dp"
-                android:textSize="12sp"
+                android:textSize="@dimen/textsize_medium"
                 android:drawableEnd="@drawable/ic_select_location_24dp"
                 android:textColor="@android:color/white"
                 android:background="@drawable/main_address_search_background"
@@ -49,7 +49,7 @@
         <LinearLayout
             android:id="@+id/linearlayout_main_restaurant_search"
             android:layout_width="match_parent"
-            android:layout_height="42dp"
+            android:layout_height="@dimen/main_search_view_height"
             android:orientation="horizontal"
             android:focusable="true"
             android:focusableInTouchMode="true"
@@ -70,7 +70,7 @@
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:paddingStart="24dp"
                 android:paddingEnd="8dp"
-                android:textSize="12sp"
+                android:textSize="@dimen/textsize_medium"
                 android:drawableEnd="@drawable/ic_filter_controls_24dp"
                 android:textColor="@android:color/white"
                 android:text="@string/main_textview_restaurant_search"/>
@@ -80,7 +80,7 @@
         <ImageView
             android:id="@+id/imageview_main_banner"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/main_banner_height"
             android:scaleType="centerCrop"
             app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
             android:visibility="gone"/>
@@ -88,7 +88,7 @@
         <ProgressBar
             android:id="@+id/progressbar_main_banner"
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="@dimen/main_banner_height"
             android:indeterminateTint="@color/colorGrey"
             android:layout_gravity="center_horizontal"
             android:visibility="visible"/>
@@ -96,13 +96,13 @@
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerview_main_categories"
             android:layout_width="wrap_content"
-            android:layout_height="86dp"
+            android:layout_height="@dimen/categories_view_height"
             android:visibility="gone"/>
 
         <com.facebook.shimmer.ShimmerFrameLayout
             android:id="@+id/shimmerframe_main_categories"
             android:layout_width="match_parent"
-            android:layout_height="86dp"
+            android:layout_height="@dimen/categories_view_height"
             android:visibility="visible"
             app:shimmer_duration="2000">
 

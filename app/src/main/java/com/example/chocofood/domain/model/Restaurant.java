@@ -20,11 +20,13 @@ public class Restaurant {
 
     private int mIsPromoted;
 
+    private int mMinimumCost;
+
     public Restaurant() {
     }
 
     public Restaurant(int id, String title, String cardImageUrl, String cuisines,
-                      String logoUrl, Double rating, String deliveryTime, int isPromoted) {
+                      String logoUrl, Double rating, String deliveryTime, int isPromoted, int minimumCost) {
         mId = id;
         mTitle = title;
         mCardImageUrl = cardImageUrl;
@@ -33,6 +35,7 @@ public class Restaurant {
         mRating = rating;
         mDeliveryTime = deliveryTime;
         mIsPromoted = isPromoted;
+        mMinimumCost = minimumCost;
     }
 
     public int getId() {
@@ -97,5 +100,13 @@ public class Restaurant {
 
     public void setIsPromoted(int isPromoted) {
         mIsPromoted = isPromoted;
+    }
+
+    public int getMinimumCost() {
+        return mMinimumCost;
+    }
+
+    public void setMinimumCost(int minimumCost) {
+        mMinimumCost = minimumCost;
     }
 }

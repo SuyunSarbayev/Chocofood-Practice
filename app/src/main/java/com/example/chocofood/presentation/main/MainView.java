@@ -8,6 +8,14 @@ import java.util.List;
 
 public interface MainView {
 
+    void initPresenter();
+
+    void initRepositories();
+
+    void initMappers();
+
+    void initUseCases();
+
     void displayRestaurants(List<Restaurant> restaurantList);
 
     void displayBanners(List<Banner> bannerList);

@@ -32,8 +32,8 @@
 
     <ImageView
         android:id="@+id/imageview_item_restaurant_logo"
-        android:layout_width="64dp"
-        android:layout_height="64dp"
+        android:layout_width="@dimen/restaurant_logo_width"
+        android:layout_height="@dimen/restaurant_logo_height"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="@+id/view_item_restaurant_shadow"
         app:layout_constraintEnd_toEndOf="@+id/view_item_restaurant_shadow"
@@ -51,6 +51,7 @@
         android:drawablePadding="@dimen/padding_extra_small"
         android:textSize="@dimen/textsize_medium"
         android:textColor="@color/colorYellow"
+        android:fontFamily="@font/avenir_next_regular"
         android:background="@drawable/main_restaurant_rating_background"
         android:drawableStart="@drawable/ic_star_24dp"
         app:layout_constraintStart_toStartOf="@+id/view_item_restaurant_shadow"
@@ -64,7 +65,9 @@
         android:paddingBottom="@dimen/padding_small"
         android:paddingStart="@dimen/padding_medium"
         android:paddingEnd="@dimen/padding_medium"
+        android:fontFamily="@font/avenir_next_regular"
         android:textSize="@dimen/textsize_medium"
+        android:textColor="@color/colorBlack"
         android:background="@drawable/main_restaurant_delivery_time_background"
         app:layout_constraintEnd_toEndOf="@+id/view_item_restaurant_shadow"
         app:layout_constraintBottom_toBottomOf="@+id/view_item_restaurant_shadow"/>
@@ -75,7 +78,8 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_small"
         android:textSize="@dimen/textsize_large"
-        android:textColor="@android:color/black"
+        android:fontFamily="@font/avenir_next_regular"
+        android:textColor="@color/colorBlack"
         app:layout_constraintTop_toBottomOf="@+id/imageview_item_restaurant"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -88,6 +92,7 @@
         android:layout_marginEnd="@dimen/margin_extra_small"
         android:maxLines="1"
         android:ellipsize="end"
+        android:fontFamily="@font/avenir_next_regular"
         android:textSize="@dimen/textsize_small"
         app:layout_constraintTop_toBottomOf="@+id/textview_item_restaurant_title"
         app:layout_constraintStart_toStartOf="parent"
@@ -100,6 +105,7 @@
         android:layout_marginEnd="@dimen/margin_small"
         android:background="@drawable/main_restaurant_promotion_background"
         android:text="@string/item_restaurant_advertisement"
+        android:fontFamily="@font/avenir_next_regular"
         android:textColor="@android:color/white"
         android:textSize="@dimen/textsize_small"
         app:layout_constraintBaseline_toBaselineOf="@+id/textview_item_restaurant_cuisines"
@@ -124,6 +130,7 @@
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_extra_small"
         android:text="@string/item_restaurant_delivery"
+        android:fontFamily="@font/avenir_next_regular"
         android:textSize="@dimen/textsize_small"
         app:layout_constraintStart_toEndOf="@+id/imageview_item_restaurant_scooter"
         app:layout_constraintTop_toTopOf="@+id/imageview_item_restaurant_scooter" />
@@ -144,6 +151,7 @@
         android:layout_marginStart="@dimen/margin_small"
         android:layout_marginTop="@dimen/margin_extra_small"
         android:text="@string/item_restaurant_price"
+        android:fontFamily="@font/avenir_next_regular"
         android:textSize="@dimen/textsize_small"
         app:layout_constraintStart_toEndOf="@+id/imageview_item_restaurant_tenge"
         app:layout_constraintTop_toTopOf="@+id/imageview_item_restaurant_tenge" />

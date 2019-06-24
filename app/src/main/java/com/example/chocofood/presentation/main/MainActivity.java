@@ -58,8 +58,8 @@ public class MainActivity extends AppCompatActivity implements MainView,
 
     private List<Restaurant> mRestaurantList;
     private List<Category> mCategoryList;
-    private LinearLayoutManager mRestaurantLinearLayoutManager;
-    private LinearLayoutManager mCategoryLinearLayoutManager;
+    private LinearLayoutManager mLinearLayoutManagerRestaurant;
+    private LinearLayoutManager mLinearLayoutManagerCategory;
     private RestaurantAdapter mRestaurantAdapter;
     private CategoryAdapter mCategoryAdapter;
 
@@ -68,13 +68,15 @@ public class MainActivity extends AppCompatActivity implements MainView,
     private boolean mIsLoading = false;
     private boolean mIsLastPage = false;
 
-    @BindView(R.id.imageview_main_banner) ImageView mBannerImageView;
+
+
+    @BindView(R.id.imageview_main_banner) ImageView mImageViewBanner;
     @BindView(R.id.tablayout_main) TabLayout mTabLayout;
-    @BindView(R.id.recyclerview_main_restaurants) RecyclerView mRestaurantsRecycler;
-    @BindView(R.id.recyclerview_main_categories) RecyclerView mCategoriesRecycler;
-    @BindView(R.id.shimmerframe_main_restaurants) ShimmerFrameLayout mShimmerRestaurantsFrameLayout;
-    @BindView(R.id.shimmerframe_main_categories) ShimmerFrameLayout mShimmerCategoriesFrameLayout;
-    @BindView(R.id.progressbar_main_banner) ProgressBar mProgressBanner;
+    @BindView(R.id.recyclerview_main_restaurants) RecyclerView mRecyclerViewRestaurant;
+    @BindView(R.id.recyclerview_main_categories) RecyclerView mRecyclerViewCategory;
+    @BindView(R.id.shimmerframe_main_restaurants) ShimmerFrameLayout mShimmerFrameLayoutRestaurant;
+    @BindView(R.id.shimmerframe_main_categories) ShimmerFrameLayout mShimmerFrameLayoutCategory;
+    @BindView(R.id.progressbar_main_banner) ProgressBar mProgressBarBanner;
     
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -87,23 +89,8 @@ public class MainActivity extends AppCompatActivity implements MainView,
         initUI();
 
         loadRestaurantListByFilter();
-        mMainPresenter.getBannerList();
-        mMainPresenter.getCategoryList();
-    }
-
-    private void initPresenter() {
-        mRestaurantMapper = new RestaurantMapper();
-        mBannerMapper = new BannerMapper();
-        mCategoryMapper = new CategoryMapper();
-        mRestaurantDataRepository = new RestaurantDataRepository(mRestaurantMapper);
-        mBannerDataRepository = new BannerDataRepository(mBannerMapper);
-        mCategoryDataRepository = new CategoryDataRepository(mCategoryMapper);
-        mGetRestaurantListByFilterUseCase = new GetRestaurantListByFilterUseCase(mRestaurantDataRepository);
-        mGetBannerListUseCase = new GetBannerListUseCase(mBannerDataRepository);
-        mGetCategoryListUseCase = new GetCategoryListUseCase(mCategoryDataRepository);
-        mMainPresenter = new MainPresenter(mGetRestaurantListByFilterUseCase,
-                mGetBannerListUseCase, mGetCategoryListUseCase);
-        mMainPresenter.setMainView(this);
+        loadCategoryList();
+        loadBanner();
     }
 
     private void setupTabLayout() {
@@ -118,17 +105,15 @@ public class MainActivity extends AppCompatActivity implements MainView,
                 null, null, LIMIT, 0);
         mRestaurantList = new ArrayList<>();
         mCategoryList = new ArrayList<>();
-        mRestaurantLinearLayoutManager = new LinearLayoutManager(this);
-        mCategoryLinearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
-        mRestaurantsRecycler.setLayoutManager(mRestaurantLinearLayoutManager);
-        mCategoriesRecycler.setLayoutManager(mCategoryLinearLayoutManager);
-        mRestaurantAdapter = new RestaurantAdapter(this);
-        mCategoryAdapter = new CategoryAdapter();
-        mRestaurantAdapter.setRestaurantList(mRestaurantList);
-        mCategoryAdapter.setCategoryList(mCategoryList);
-        mCategoryAdapter.setOnItemClickListener(this);
-        mRestaurantsRecycler.setAdapter(mRestaurantAdapter);
-        mRestaurantsRecycler.addOnScrollListener(new PaginationScrollListener(mRestaurantLinearLayoutManager) {
+        mLinearLayoutManagerRestaurant = new LinearLayoutManager(this);
+        mLinearLayoutManagerCategory = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        mRecyclerViewRestaurant.setLayoutManager(mLinearLayoutManagerRestaurant);
+        mRecyclerViewCategory.setLayoutManager(mLinearLayoutManagerCategory);
+        initCategoryAdapter();
+        initRestaurantAdapter();
+        mRecyclerViewCategory.setAdapter(mCategoryAdapter);
+        mRecyclerViewRestaurant.setAdapter(mRestaurantAdapter);
+        mRecyclerViewRestaurant.addOnScrollListener(new PaginationScrollListener(mLinearLayoutManagerRestaurant) {
             @Override
             public void loadMoreItems() {
                 mIsLoading = true;
@@ -147,24 +132,70 @@ public class MainActivity extends AppCompatActivity implements MainView,
                 return mIsLoading;
             }
         });
-        mCategoriesRecycler.setAdapter(mCategoryAdapter);
     }
 
-    public void loadRestaurantListByFilter() {
+    private void initCategoryAdapter() {
+        mCategoryAdapter = new CategoryAdapter();
+        mCategoryAdapter.setCategoryList(mCategoryList);
+        mCategoryAdapter.setOnItemClickListener(this);
+    }
+
+    private void initRestaurantAdapter() {
+        mRestaurantAdapter = new RestaurantAdapter(this);
+        mRestaurantAdapter.setRestaurantList(mRestaurantList);
+    }
+
+    private void loadRestaurantListByFilter() {
+        mShimmerFrameLayoutRestaurant.setVisibility(View.VISIBLE);
+        mShimmerFrameLayoutRestaurant.startShimmer();
         mMainPresenter.getRestaurantListByFilter(mRestaurantFilteredRequest);
     }
 
-    public void clearRestaurantList() {
-        mRestaurantList.clear();
-        mRestaurantAdapter.notifyDataSetChanged();
-        mRestaurantsRecycler.setVisibility(View.GONE);
+    private void loadCategoryList() {
+        mShimmerFrameLayoutCategory.startShimmer();
+        mMainPresenter.getCategoryList();
     }
 
-    public void refreshLayout() {
-        clearRestaurantList();
+    private void loadBanner() {
+        mMainPresenter.getBannerList();
+    }
+
+    private void clearRestaurantList() {
+        mRestaurantList.clear();
+        mRestaurantAdapter.notifyDataSetChanged();
         mRestaurantFilteredRequest.setOffset(0);
-        mShimmerRestaurantsFrameLayout.setVisibility(View.VISIBLE);
-        mShimmerRestaurantsFrameLayout.startShimmer();
+        mRecyclerViewRestaurant.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void initPresenter() {
+        initMappers();
+        initRepositories();
+        initUseCases();
+        mMainPresenter = new MainPresenter(mGetRestaurantListByFilterUseCase,
+                mGetBannerListUseCase, mGetCategoryListUseCase);
+        mMainPresenter.setMainView(this);
+    }
+
+    @Override
+    public void initRepositories() {
+        mRestaurantDataRepository = new RestaurantDataRepository(mRestaurantMapper);
+        mBannerDataRepository = new BannerDataRepository(mBannerMapper);
+        mCategoryDataRepository = new CategoryDataRepository(mCategoryMapper);
+    }
+
+    @Override
+    public void initMappers() {
+        mRestaurantMapper = new RestaurantMapper();
+        mBannerMapper = new BannerMapper();
+        mCategoryMapper = new CategoryMapper();
+    }
+
+    @Override
+    public void initUseCases() {
+        mGetRestaurantListByFilterUseCase = new GetRestaurantListByFilterUseCase(mRestaurantDataRepository);
+        mGetBannerListUseCase = new GetBannerListUseCase(mBannerDataRepository);
+        mGetCategoryListUseCase = new GetCategoryListUseCase(mCategoryDataRepository);
     }
 
     @Override
@@ -180,26 +211,26 @@ public class MainActivity extends AppCompatActivity implements MainView,
             mIsLastPage = true;
         }
 
-        mShimmerRestaurantsFrameLayout.stopShimmer();
-        mShimmerRestaurantsFrameLayout.setVisibility(View.GONE);
-        mRestaurantsRecycler.setVisibility(View.VISIBLE);
+        mShimmerFrameLayoutRestaurant.stopShimmer();
+        mShimmerFrameLayoutRestaurant.setVisibility(View.GONE);
+        mRecyclerViewRestaurant.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void displayBanners(List<Banner> bannerList) {
         Banner banner = bannerList.get(0);
-        Glide.with(this).load(banner.getImageUrl()).into(mBannerImageView);
-        mProgressBanner.setVisibility(View.GONE);
-        mBannerImageView.setVisibility(View.VISIBLE);
+        Glide.with(this).load(banner.getImageUrl()).into(mImageViewBanner);
+        mProgressBarBanner.setVisibility(View.GONE);
+        mImageViewBanner.setVisibility(View.VISIBLE);
     }
 
     @Override
     public void displayCategories(List<Category> categoryList) {
         mCategoryList.addAll(categoryList);
         mCategoryAdapter.notifyDataSetChanged();
-        mShimmerCategoriesFrameLayout.stopShimmer();
-        mShimmerCategoriesFrameLayout.setVisibility(View.GONE);
-        mCategoriesRecycler.setVisibility(View.VISIBLE);
+        mShimmerFrameLayoutCategory.stopShimmer();
+        mShimmerFrameLayoutCategory.setVisibility(View.GONE);
+        mRecyclerViewCategory.setVisibility(View.VISIBLE);
     }
 
     @Override
@@ -208,15 +239,8 @@ public class MainActivity extends AppCompatActivity implements MainView,
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        mShimmerRestaurantsFrameLayout.startShimmer();
-        mShimmerCategoriesFrameLayout.startShimmer();
-    }
-
-    @Override
     public void onTabSelected(TabLayout.Tab tab) {
-        refreshLayout();
+        clearRestaurantList();
         switch (tab.getPosition()) {
             case 0:
                 mRestaurantFilteredRequest.setFilter("rating");
@@ -248,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements MainView,
     public void onItemClick(int position) {
         Category category = mCategoryList.get(position);
         mRestaurantFilteredRequest.setFoodType(category.getSlug());
-        refreshLayout();
+        clearRestaurantList();
         loadRestaurantListByFilter();
     }
 }

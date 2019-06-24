@@ -18,7 +18,8 @@ public class RestaurantMapper {
             restaurant = new Restaurant(restaurantEntity.getId(), restaurantEntity.getTitle(),
                     restaurantEntity.getCardImageUrl(), restaurantEntity.getCuisines(),
                     restaurantEntity.getLogoUrl(), restaurantEntity.getRating(),
-                    restaurantEntity.getDeliveryTime(), restaurantEntity.getIsPromoted());
+                    restaurantEntity.getDeliveryTime(), restaurantEntity.getIsPromoted(),
+                    restaurantEntity.getMinimumCost());
 
         }
         return restaurant;
