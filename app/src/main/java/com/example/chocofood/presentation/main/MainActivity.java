@@ -25,8 +25,8 @@ import com.example.chocofood.domain.usecase.GetBannerListUseCase;
 import com.example.chocofood.domain.usecase.GetCategoryListUseCase;
 import com.example.chocofood.domain.usecase.GetRestaurantListByFilterUseCase;
 import com.example.chocofood.domain.model.Restaurant;
-import com.example.chocofood.presentation.OnItemClickListener;
-import com.example.chocofood.presentation.PaginationScrollListener;
+import com.example.chocofood.presentation.listener.OnItemClickListener;
+import com.example.chocofood.presentation.listener.PaginationScrollListener;
 import com.example.chocofood.presentation.adapter.CategoryAdapter;
 import com.example.chocofood.presentation.adapter.RestaurantAdapter;
 import com.facebook.shimmer.ShimmerFrameLayout;
@@ -37,8 +37,8 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-import static com.example.chocofood.presentation.Constants.INITIAL_FILTER;
-import static com.example.chocofood.presentation.Constants.LIMIT;
+import static com.example.chocofood.domain.Constants.INITIAL_FILTER;
+import static com.example.chocofood.domain.Constants.LIMIT;
 
 
 public class MainActivity extends AppCompatActivity implements MainView,
@@ -151,8 +151,6 @@ public class MainActivity extends AppCompatActivity implements MainView,
     }
 
     public void loadRestaurantListByFilter() {
-        String offsetMessage = "Loading offset " + mRestaurantFilteredRequest.getOffset();
-        Toast.makeText(this, offsetMessage, Toast.LENGTH_SHORT).show();
         mMainPresenter.getRestaurantListByFilter(mRestaurantFilteredRequest);
     }
 

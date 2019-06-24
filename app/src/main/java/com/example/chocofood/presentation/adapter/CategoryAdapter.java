@@ -1,6 +1,5 @@
 package com.example.chocofood.presentation.adapter;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -9,7 +8,7 @@ import android.view.ViewGroup;
 
 import com.example.chocofood.R;
 import com.example.chocofood.domain.model.Category;
-import com.example.chocofood.presentation.OnItemClickListener;
+import com.example.chocofood.presentation.listener.OnItemClickListener;
 import com.example.chocofood.presentation.viewholder.CategoryViewHolder;
 
 import java.util.ArrayList;

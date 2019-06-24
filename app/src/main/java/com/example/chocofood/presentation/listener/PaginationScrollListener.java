@@ -1,4 +1,4 @@
-package com.example.chocofood.presentation;
+package com.example.chocofood.presentation.listener;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;

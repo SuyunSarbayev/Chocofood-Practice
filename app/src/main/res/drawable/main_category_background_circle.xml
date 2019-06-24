@@ -6,6 +6,6 @@
         android:width="0.5dp"
         android:color="@android:color/darker_gray"/>
     <size
-        android:width="48dp"
-        android:height="48dp"/>
+        android:width="@dimen/category_imageview_width"
+        android:height="@dimen/category_imageview_height"/>
 </shape>

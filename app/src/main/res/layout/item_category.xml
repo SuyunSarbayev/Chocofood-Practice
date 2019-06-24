@@ -12,8 +12,8 @@
 
     <ImageView
         android:id="@+id/imageview_item_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/category_imageview_width"
+        android:layout_height="@dimen/category_imageview_height"
         android:background="@drawable/main_category_background_circle"/>
 
     <TextView

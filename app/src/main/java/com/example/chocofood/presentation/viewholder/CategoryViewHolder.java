@@ -1,16 +1,14 @@
 package com.example.chocofood.presentation.viewholder;
 
-import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.chocofood.R;
 import com.example.chocofood.domain.model.Category;
-import com.example.chocofood.presentation.OnItemClickListener;
+import com.example.chocofood.presentation.listener.OnItemClickListener;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +29,23 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.
     public void bind(Category category, OnItemClickListener onItemClickListener) {
         mTitle.setText(category.getTitle());
         mOnItemClickListener = onItemClickListener;
+        switch (category.getTitle()) {
+            case "Пицца":
+                mImage.setImageResource(R.drawable.category_pizza);
+                break;
+            case "Фаст-фуд":
+                mImage.setImageResource(R.drawable.category_fastfood);
+                break;
+            case "Сладенькое":
+                mImage.setImageResource(R.drawable.category_sweet);
+                break;
+            case "Шашлыки":
+                mImage.setImageResource(R.drawable.category_shashlyk);
+                break;
+            case "Суши/роллы":
+                mImage.setImageResource(R.drawable.category_sushi);
+                break;
+        }
     }
 
     @Override

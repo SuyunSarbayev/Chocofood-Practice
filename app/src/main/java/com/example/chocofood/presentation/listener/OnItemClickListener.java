@@ -1,4 +1,4 @@
-package com.example.chocofood.presentation;
+package com.example.chocofood.presentation.listener;
 
 public interface OnItemClickListener {
 
